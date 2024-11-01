@@ -3,21 +3,24 @@ package com.example.sales.entities.saleitem.dto;
 import com.example.sales.entities.product.dto.ProductDTO;
 import com.example.sales.entities.saleitem.SaleItem;
 
-public class SaleItemMinDTO {
+public class SaleItemDTO {
     private ProductDTO product;
     private Integer quantity;
+    private Double subtotal;
 
-    public SaleItemMinDTO() {
+    public SaleItemDTO() {
     }
 
-    public SaleItemMinDTO(ProductDTO product, Integer quantity) {
+    public SaleItemDTO(ProductDTO product, Integer quantity, Double subtotal) {
         this.product = product;
         this.quantity = quantity;
+        this.subtotal = subtotal;
     }
 
-    public SaleItemMinDTO(SaleItem entity) {
+    public SaleItemDTO(SaleItem entity) {
         this.product = new ProductDTO(entity.getProduct());
         this.quantity = entity.getQuantity();
+        this.subtotal = entity.getSubtotal();
     }
 
     public ProductDTO getProduct() {
@@ -34,5 +37,13 @@ public class SaleItemMinDTO {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
     }
 }
