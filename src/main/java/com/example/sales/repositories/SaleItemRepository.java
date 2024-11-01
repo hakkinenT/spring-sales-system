@@ -2,7 +2,7 @@ package com.example.sales.repositories;
 
 import com.example.sales.entities.saleitem.SaleItem;
 import com.example.sales.entities.saleitem.pk.SaleItemPK;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.sales.repositories.custom.JpaRefreshRepository;
 
-public interface SaleItemRepository extends JpaRepository<SaleItem, SaleItemPK> {
+public interface SaleItemRepository extends JpaRefreshRepository<SaleItem, SaleItemPK> {
 }

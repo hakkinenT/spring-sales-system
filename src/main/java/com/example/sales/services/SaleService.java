@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 
 @Service
 public class SaleService {
@@ -34,17 +35,20 @@ public class SaleService {
     public SaleDTO insert(SaleMinDTO dto){
         Sale sale = new Sale();
         sale.setMoment(Instant.now());
+        sale = saleRepository.save(sale);
         
         for (SaleItemMinDTO item : dto.getItems()){
             Product product = productRepository.getReferenceById(item.getProduct().getId());
             SaleItem saleItem = new SaleItem(product, sale, item.getQuantity());
+            saleItem = saleItemRepository.saveAndRefresh(saleItem);
 
             sale.getSaleItems().add(saleItem);
         }
 
-        sale = saleRepository.saveAndFlush(sale);
-        saleItemRepository.saveAllAndFlush(sale.getSaleItems());
-        return new SaleDTO(saleRepository.findById(sale.getId()).orElseThrow(() -> new EntityNotFoundException("Não encontrado")));
+
+        saleRepository.refresh(sale);
+
+        return new SaleDTO(sale);
     }
 
     @Transactional(readOnly = true)
