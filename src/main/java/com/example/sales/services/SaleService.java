@@ -11,6 +11,9 @@ import com.example.sales.repositories.SaleItemRepository;
 import com.example.sales.repositories.SaleRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,5 +45,11 @@ public class SaleService {
         sale = saleRepository.saveAndFlush(sale);
         saleItemRepository.saveAllAndFlush(sale.getSaleItems());
         return new SaleDTO(saleRepository.findById(sale.getId()).orElseThrow(() -> new EntityNotFoundException("Não encontrado")));
+    }
+
+    @Transactional(readOnly = true)
+    public Page<SaleDTO> findAll(Pageable pageable){
+        Page<Sale> sales = saleRepository.findAll(pageable);
+        return sales.map(SaleDTO::new);
     }
 }
