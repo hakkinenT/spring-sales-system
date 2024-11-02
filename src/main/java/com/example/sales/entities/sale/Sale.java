@@ -3,6 +3,9 @@ package com.example.sales.entities.sale;
 import com.example.sales.entities.saleitem.SaleItem;
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.generator.EventType;
 import org.springframework.data.annotation.ReadOnlyProperty;
 
 import java.time.Instant;
@@ -17,6 +20,9 @@ public class Sale {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant moment;
+
+    @Column(insertable = false, updatable = false)
+    @Generated(event = {EventType.INSERT, EventType.UPDATE})
     private Double total;
 
     @OneToMany(mappedBy = "id.sale")

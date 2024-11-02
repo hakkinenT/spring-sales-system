@@ -3,12 +3,15 @@ package com.example.sales.entities.saleitem;
 import com.example.sales.entities.product.Product;
 import com.example.sales.entities.sale.Sale;
 import com.example.sales.entities.saleitem.pk.SaleItemPK;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.Table;
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.data.annotation.ReadOnlyProperty;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.generator.EventType;
 
 import java.util.Objects;
 
@@ -20,6 +23,8 @@ public class SaleItem {
 
     private Integer quantity;
 
+    @Column(insertable = false, updatable = false)
+    @Generated(event = {EventType.INSERT, EventType.UPDATE})
     private Double subtotal;
 
     public SaleItem() {
