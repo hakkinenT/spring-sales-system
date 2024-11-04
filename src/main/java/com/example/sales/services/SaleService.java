@@ -40,7 +40,7 @@ public class SaleService {
         for (SaleItemMinDTO item : dto.getItems()){
             Product product = productRepository.getReferenceById(item.getProduct().getId());
             SaleItem saleItem = new SaleItem(product, sale, item.getQuantity());
-            saleItem = saleItemRepository.saveAndRefresh(saleItem);
+            saleItem = saleItemRepository.saveAndFlush(saleItem);
 
             sale.getSaleItems().add(saleItem);
         }

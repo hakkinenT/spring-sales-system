@@ -8,6 +8,8 @@ import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Generated;
+import org.hibernate.generator.EventType;
 import org.springframework.data.annotation.ReadOnlyProperty;
 
 import java.util.Objects;
@@ -20,6 +22,7 @@ public class SaleItem {
 
     private Integer quantity;
 
+    @Generated(event = {EventType.INSERT, EventType.UPDATE})
     private Double subtotal;
 
     public SaleItem() {
