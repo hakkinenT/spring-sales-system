@@ -11,10 +11,5 @@ import java.util.List;
 public interface JpaRefreshRepository<T, ID> extends JpaRepository<T, ID> {
     void refresh(T t);
 
-    default T saveAndRefresh(T t){
-        t = saveAndFlush(t);
-        refresh(t);
-
-        return t;
-    }
+    T saveAndRefresh(T t);
 }

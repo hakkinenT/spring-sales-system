@@ -26,4 +26,13 @@ public class JpaRefreshRepositoryImpl<T, ID extends Serializable> extends Simple
         entityManager.refresh(t);
 
     }
+
+    @Override
+    @Transactional
+    public T saveAndRefresh(T t) {
+        t = this.saveAndFlush(t);
+        this.refresh(t);
+
+        return t;
+    }
 }
