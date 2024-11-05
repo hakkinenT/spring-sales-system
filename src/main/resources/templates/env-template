@@ -1,10 +1,24 @@
 //crie um arquivo chamado env.properties na pasta resources
 
-SPRING_DATASOURCE_URL=
-SPRING_DATASOURCE_USERNAME
-SPRING_DATASOURCE_PASSWORD
-SPRING_JPA_HIBERNATE_DDL_AUTO
+//Informações de conexão do banco de dados que foi criado no docker
 
-POSTGRES_DB
-POSTGRES_USERNAME
-POSTGRES_PASSWORD
+// URL de conexão com o banco. Exemplo: jdbc:postgresql://db:5432/{nome-do-banco-definido-abaixo}
+SPRING_DATASOURCE_URL=
+
+// Username definido abaixo
+SPRING_DATASOURCE_USERNAME=
+
+// Senha definida abaixo
+SPRING_DATASOURCE_PASSWORD=
+
+
+//Informações de conexão do banco de dados que será criado pelo docker
+
+// Nome do banco - apenas o nome
+POSTGRES_DB=
+
+// Username
+POSTGRES_USERNAME=
+
+// senha
+POSTGRES_PASSWORD=
