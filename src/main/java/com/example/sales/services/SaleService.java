@@ -42,8 +42,8 @@ public class SaleService {
             sale.getSaleItems().add(saleItem);
         }
 
-        sale = saleRepository.saveAndFlush(sale);
-        saleItemRepository.saveAllAndFlush(sale.getSaleItems());
+        sale = saleRepository.save(sale);
+        saleItemRepository.saveAll(sale.getSaleItems());
         return new SaleDTO(saleRepository.findById(sale.getId()).orElseThrow(() -> new EntityNotFoundException("Não encontrado")));
     }
 
